@@ -1,103 +1,102 @@
 import { Schema, model } from 'mongoose';
-import {
-  Guardian,
-  LocalGuardian,
-  Student,
-  UserName,
-} from './student.interface';
+import { Guardian, LocalGuardian, Student, UserName } from './student.interface';
 
 const userNameSchema = new Schema<UserName>({
   firstName: {
-    type: String,
-    required: true,
+    type: String
   },
   middleName: {
-    type: String,
+    type: String
   },
   lastName: {
-    type: String,
-    required: true,
+    type: String
   },
 });
 
 const guardianSchema = new Schema<Guardian>({
   fatherName: {
-    type: String,
-    required: true,
+    type: String
   },
   fatherOccupation: {
-    type: String,
-    required: true,
+    type: String
   },
   fatherContactNo: {
-    type: String,
-    required: true,
+    type: String
   },
   motherName: {
-    type: String,
-    required: true,
+    type: String
   },
   motherOccupation: {
-    type: String,
-    required: true,
+    type: String
   },
   motherContactNo: {
-    type: String,
-    required: true,
+    type: String
   },
 });
 
 const localGuardianSchema = new Schema<LocalGuardian>({
   name: {
-    type: String,
-    required: true,
+    type: String
   },
   occupation: {
-    type: String,
-    required: true,
+    type: String
   },
   contactNo: {
-    type: String,
-    required: true,
+    type: String
   },
   address: {
-    type: String,
-    required: true,
+    type: String
   },
 });
 
 const studentSchema = new Schema<Student>({
-  id: { type: String },
-  name: userNameSchema,
-  gender: ['male', 'female'],
-  dateOfBirth: { type: String },
+  id: { 
+    type:String
+  },
+  name: {
+    type:userNameSchema
+  },
+  gender: {
+    type:String,
+    enum:['male','female','other']
+  },
+  dateOfBirth: { 
+    type:String
+   },
   email: {
-    type: String,
-    required: true,
+    type: String
   },
   contactNo: {
-    type: String,
-    required: true,
+    type: String
   },
-  emergenctyContacNo: {
-    type: String,
-    required: true,
+  emergencyContactNo: {
+    type: String
   },
-  bloodGroup: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+  bloodGroup: {
+    type:String,
+    enum:['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+  },
   presentAddress: {
-    type: String,
-    required: true,
+    type: String
   },
   permanentAddress: {
-    type: String,
-    required: true,
+    type: String
   },
-  guardian: guardianSchema,
-  localGuardian: localGuardianSchema,
+  guardian: {
+    type:guardianSchema
+  },
+  localGuardian: {
+    type:localGuardianSchema
+  },
   profileImg: {
-    type: String,
+    type: String
   },
-  isActive: ['active', 'blocked'],
+  isActive: {
+    type:String,
+    enum:['active', 'blocked'],
+    default:'active'
+  },
 });
 
 export const StudentModel = model<Student>('Student', studentSchema);
+
